@@ -84,7 +84,7 @@
                 <label for="images" class="mb-2" >Upload Images:</label>
                 <div id="imageInputs" class="row mb-3 position-relative gap-4">
                     <div class="file-input-container col-md-3">
-                        <label for="fileInput" id="imageBoxText" class="file-input-text">Click to add button to add images.</label>
+                        <label for="fileInput" id="imageBoxText" class="file-input-text">  Select thumbnail Image for Product  .</label>
                         <input id="fileInput" type="file" name="images[]" class="form-control-file mb-2 file-input" onchange="previewImage(event)">
                     </div>
                 </div>

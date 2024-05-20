@@ -69,6 +69,7 @@
                 <div class="content">
                     @yield('content')
                 </div>
+                
                 @include('UserComponents.Layouts.footer')
             </div>
         </div>

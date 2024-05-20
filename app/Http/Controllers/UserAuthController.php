@@ -67,22 +67,24 @@ class UserAuthController extends Controller
             'registerFirstName' => 'required|string|max:255',
             'registerLastName' => 'required|string|max:255',
             'registerEmail' => 'required|string|email|max:255|unique:users,email',
-            'registerUsername' => 'required|string|max:255|unique:users,username',
+            'registerUsername' => 'required|string|max:255|unique:users,username', // Ensure username is unique
             'registerPassword' => 'required|string|confirmed',
         ]);
-
+    
         // Check if username already exists
         $existingUsername = User::where('username', $request->registerUsername)->exists();
         // Check if email already exists
         $existingEmail = User::where('email', $request->registerEmail)->exists();
-
+    
         if ($existingUsername) {
-            return redirect()->route('user.index')->with('error', 'The username is already taken. Please choose a different one.');
+            return redirect()->back()->withInput($request->all())->with('error', 'The username is already taken. Please choose a different one.');
         }
-
+    
         if ($existingEmail) {
-            return redirect()->route('user.index')->with('error', 'The email address is already registered. Please use a different one.');
+            return redirect()->back()->withInput($request->all())->with('error', 'The email address is already registered. Please use a different one.');
         }
+    
+        // If both username and email are unique, create the user
         User::create([
             'firstname' => $request->registerFirstName,
             'lastname' => $request->registerLastName,
@@ -90,9 +92,10 @@ class UserAuthController extends Controller
             'username' => $request->registerUsername,
             'password' => Hash::make($request->registerPassword),
         ]);
-
+    
         return redirect()->route('user-login-signup')->with('success', 'Registration successful. Please login.');
     }
+    
 
 
 

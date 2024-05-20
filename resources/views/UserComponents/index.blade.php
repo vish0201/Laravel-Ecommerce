@@ -7,7 +7,7 @@
             width: 80%;
             margin: auto;
             overflow: hidden;
-            border-radius: 30px;
+            /* border-radius: 30px; */
             margin-top: 12px;
         }
 

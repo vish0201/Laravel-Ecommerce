@@ -44,8 +44,18 @@
                 <h5>About Us</h5>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus turpis eget velit vestibulum.</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <h5>Useful Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-dark">Home</a></li>
+                    <li><a href="#" class="text-dark">About Us</a></li>
+                    <li><a href="#" class="text-dark">Services</a></li>
+                    <li><a href="#" class="text-dark">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-2">
+                <h5>  License Policies </h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-dark">Home</a></li>
                     <li><a href="#" class="text-dark">About Us</a></li>
