@@ -48,7 +48,7 @@ class BookmarkController extends Controller
         $user_id = Auth::id();
         $bookmarks = Bookmark::where('user_id', $user_id)->get();
 
-        return view('bookmarks', compact('bookmarks'));
+        return view('UserComponents.Partials.saved', compact('bookmarks'));
     }
 
     

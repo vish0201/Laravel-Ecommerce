@@ -67,9 +67,7 @@
         font-weight: bold;
         font-family: cursive;
         transition: color 0.3s ease-in-out;
-        background-color: #ffffff;
-        padding: 4px;
-        border-radius: 12px;
+
     }
 </style>
 </head>
@@ -78,7 +76,7 @@
     <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
         <div class="container">
             <!-- Logo -->
-            <a class="navbar-brand" href="#">Dot - Com</a>
+            <a class="navbar-brand" href="{{ route('user.index') }}">Dot - Com</a>
 
             <!-- Toggler button for mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
