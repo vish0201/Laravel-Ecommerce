@@ -16,7 +16,27 @@
 
 
     <style>
-        /* Custom Styles */
+        ::-webkit-scrollbar {
+            width: 5px;
+            /* Set width of the scrollbar */
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #4D869C;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #CDE8E5;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background-color: #EEF7FF;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         .navbar-custom {
             background-color: #4d869c;
         }
@@ -30,7 +50,6 @@
             min-height: 100vh;
 
         }
-
         .content {
             background-color: #eff7ff;
             min-height: 100vh;
@@ -46,7 +65,7 @@
             <div class="">
                 @include('UserComponents.Layouts.notification')
                 @include('UserComponents.Layouts.navbar')
-                
+
                 <div class="content">
                     @yield('content')
                 </div>

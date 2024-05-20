@@ -61,10 +61,10 @@ class BookmarkController extends Controller
         }
 
         $userId = Auth::id();
-    
+        $productId = $request->input('product_id');
 
         // Find and delete the cart item
-        Bookmark::where('user_id', $userId)->delete();
+        Bookmark::where('user_id', $userId)->where('product_id', $productId)->delete();
 
         return redirect()->back()->with('success', 'Product removed from Bookmark successfully!');
     }

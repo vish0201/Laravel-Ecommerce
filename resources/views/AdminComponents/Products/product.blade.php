@@ -51,11 +51,11 @@
 
                             <td class="text-center product-images  ">
                                 
-                                <div class="hover-container" onmouseover="showImages(this)" onmouseout="hideImages(this)">
+                                <div class="hover-container  " onmouseover="showImages(this)" onmouseout="hideImages(this)">
 
                                     <img src="{{ '/' . env('PRODUCT_DIR') . '/' . $product->images[0] }}" width="40">
 
-                                    <div class="absolute-div shadow">
+                                    <div class="absolute-div shadow z-3">
                                         <div class="image-overlay  ">
                                             @foreach ($product->images as $image)
                                                 <img src="{{ '/' . env('PRODUCT_DIR') . '/' . $image }}"
@@ -77,7 +77,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn "
-                                        onclick="return confirm('Are you sure you want to delete this product?')">🗑️</button>
+                                        onclick="return confirm('Are you sure you want to delete this product?')"> <i class="bi bi-trash text-danger  fs-4 " ></i> </button>
                                 </form>
                             </td>
                         </tr>

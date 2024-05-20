@@ -62,7 +62,7 @@
                                     <div>
                                         <form method="GET" action="{{ route('category.edit', $category->id) }}">
                                             @csrf
-                                            <button type="submit" class="btn ">✏️</button>
+                                            <button type="submit" class="btn "> <i class="bi bi-pen" ></i> </button>
                                         </form>
                                     </div>
 
@@ -71,7 +71,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn "
-                                                onclick="return confirm('Are you sure you want to delete this category?')">🗑</button>
+                                                onclick="return confirm('Are you sure you want to delete this category?')"><i class="bi bi-trash text-danger "  ></i></button>
                                         </form>
                                     </div>
 
