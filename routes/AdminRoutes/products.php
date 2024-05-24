@@ -13,4 +13,7 @@ Route::prefix('products')->group(function () {
     Route::post('/store', [ProductController::class , 'store'])->name('product.store');
     Route::delete('/{product}', [ProductController::class , 'delete'])->name('product.delete');
     Route::post('/product/{product}/toggle-featured', [ProductController::class, 'toggleFeatured'])->name('product.toggle-featured');
+    Route::get('/product/{product_id}/product-view', [ProductController::class, 'showProduct'])->name('product.view');
+
+
 });

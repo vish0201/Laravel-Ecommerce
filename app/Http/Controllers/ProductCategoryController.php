@@ -37,10 +37,11 @@ class ProductCategoryController extends Controller
     {
         $categories = ProductCategory::whereHas('products')->get();
         if ($categoryId) {
-            $products = Product::where('cat_id', $categoryId)->get();
+            $products = Product::where('cat_id', $categoryId)->paginate(10);
         } else {
-            $products = Product::all();
+            $products = Product::paginate(10);
         }
+        
 
         if ($request->ajax()) {
             return view('UserComponents.partials.products', compact('products'))->render();

@@ -59,10 +59,15 @@
         </div>
     </div>
 
+
+    
+    <div class="container ">
+        {{ $products->links() }}
+    </div>
+
     <!-- Loader -->
 
     <div class="loader-div  ">
-
         <div id="loader" class="loader"></div>
     </div>
 

@@ -12,7 +12,12 @@ class UserAuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('UserComponents.Login.login');
+        return view('UserComponents.Login-SignUp.loginUser');
+    }
+
+    public function showRegisterForm()
+    {
+        return view('UserComponents.Login-SignUp.registerUser');
     }
 
     public function userProfile()
@@ -24,10 +29,6 @@ class UserAuthController extends Controller
     }
 
 
-    public function showRegisterForm()
-    {
-        return view('auth.register');
-    }
 
     public function login(Request $request)
     {
@@ -70,20 +71,25 @@ class UserAuthController extends Controller
             'registerUsername' => 'required|string|max:255|unique:users,username', // Ensure username is unique
             'registerPassword' => 'required|string|confirmed',
         ]);
-    
+
+
+        
         // Check if username already exists
         $existingUsername = User::where('username', $request->registerUsername)->exists();
         // Check if email already exists
         $existingEmail = User::where('email', $request->registerEmail)->exists();
-    
+
+
         if ($existingUsername) {
-            return redirect()->back()->withInput($request->all())->with('error', 'The username is already taken. Please choose a different one.');
+            session()->flash('error', 'The username is already taken. Please choose a different one.');
+            return redirect()->back();
         }
     
         if ($existingEmail) {
-            return redirect()->back()->withInput($request->all())->with('error', 'The email address is already registered. Please use a different one.');
+            session()->flash('error', 'The email address is already registered. Please use a different one.');
+            return redirect()->back();
         }
-    
+
         // If both username and email are unique, create the user
         User::create([
             'firstname' => $request->registerFirstName,
@@ -92,11 +98,8 @@ class UserAuthController extends Controller
             'username' => $request->registerUsername,
             'password' => Hash::make($request->registerPassword),
         ]);
-    
-        return redirect()->route('user-login-signup')->with('success', 'Registration successful. Please login.');
+        return redirect()->route('user.login')->with('success', 'Registration successful. Please login.');
     }
-    
-
 
 
 

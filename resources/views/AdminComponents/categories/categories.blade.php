@@ -83,7 +83,7 @@
                 </tbody>
             </table>
 
-            <div class="    ">
+            <div class="">
                 {{ $categories->links() }}
             </div>
         @endif

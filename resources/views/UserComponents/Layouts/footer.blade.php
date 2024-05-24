@@ -14,11 +14,12 @@
     .footer a {
         color: #4D869C;
         text-decoration: none;
-        transition: color 0.3s ease-in-out;
+        transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Added transition */
     }
 
     .footer a:hover {
         color: #007bff;
+        transform: scale(1.1); /* Scale up on hover */
     }
 
     .footer .social-icons a {
@@ -35,7 +36,8 @@
         border-top: 1px solid #EEF7FF;
     }
 </style>
-</head>
+
+
 <body>
 <footer class="footer">
     <div class="container">

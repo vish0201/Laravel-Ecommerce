@@ -90,10 +90,10 @@
                         <a class="nav-link" href="{{ route('user.index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('category.products') }}">products</a>
+                        <a class="nav-link" href="{{ route('category.products') }}">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/about">About</a>
+                        <a class="nav-link" href="{{  route('about') }}">About</a>
                     </li>
                 </ul>
             </div>
@@ -126,7 +126,7 @@
                             class="rounded-circle" style="width: 40px; height: 40px;">
                     </a>
                 @else
-                    <a class="nav-link position-relative" href="{{ route('user-login-signup') }}">
+                    <a class="nav-link position-relative" href="{{ route('user.login') }}">
                         <i class="bi bi-person-circle fs-4"></i>
                     </a>
                 @endif

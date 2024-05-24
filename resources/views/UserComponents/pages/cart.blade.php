@@ -3,6 +3,10 @@
 @extends('UserComponents.Layouts.layout')
 
 @section('content')
+
+    <style>
+
+    </style>
     <div class="container mt-5">
         <div class="row gap-4 ">
             <div class="col-md-7 ">
@@ -31,7 +35,8 @@
                                 <div class="col-md-4 col-lg-3">
                                     <h5 class="mb-0">{{ $item->product->name }}</h5>
                                     <p style="font-size: 14px" class="mb-0">{{ $item->product->category->name }}</p>
-                                    <p style="font-size: 14px" class="my-0 text-truncate " >{{ $item->product->description }} </p>
+                                    <p style="font-size: 14px" class="my-0 text-truncate ">{{ $item->product->description }}
+                                    </p>
                                 </div>
 
                                 <div class="col-md-3 col-lg-3 my-auto">
@@ -45,11 +50,13 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="input-group">
-                                            <button type="button" class="btn btn-outline-secondary border-0 "
-                                                onclick="updateQuantity('{{ $item->id }}', -1)">-</button>
+                                            <button type="button" class="btn border-0   "
+                                                onclick="updateQuantity('{{ $item->id }}', -1)">
+                                                {{ $item->quantity == 1 ? '' : '-' }} </button>
                                             <input type="number" readonly name="quantity" value="{{ $item->quantity }}"
-                                                min="1" class="form-control text-center " id="quantity-{{ $item->id }}">
-                                            <button type="button" class="btn btn-outline-secondary border-0 "
+                                                min="1" class=" w-25  text-center border-0  bg-transparent    "
+                                                id="quantity-{{ $item->id }}">
+                                            <button type="button" class="btn  border-0 "
                                                 onclick="updateQuantity('{{ $item->id }}', 1)">+</button>
                                         </div>
                                     </form>
@@ -74,11 +81,11 @@
             </div>
             <div class="col-md-3 mt-5 {{ $cartItems->isEmpty() ? 'd-none' : '' }}">
                 <div class="bg-light p-3 rounded-3 shadow">
-                    <h4>Cart summary</h4>
+                    <h4 class="text-center  mb-4 ">Cart summary</h4>
                     <div id="cart-summary">
                         <ul class="list-unstyled   justify-content-between ">
                             @foreach ($cartItems as $item)
-                                <li>{{ $item->product->name .   " x " . $item->quantity   }} <span class="float-end"
+                                <li>{{ $item->product->name . ' x ' . $item->quantity }} <span class="float-end"
                                         id="item-total-{{ $item->id }}">
                                         ₹{{ $item->product->price * $item->quantity }}</span></li>
                             @endforeach
@@ -90,7 +97,11 @@
 
                         <p>Total: <span class="float-end " id="summary-total">₹{{ $total }}</span></p>
 
-
+                        <a href="">
+                            <button class=" btn btn-block w-100 "
+                                style="background-color: #4D869C;
+                color: white;"> Checkout </button>
+                        </a>
                     </div>
                 </div>
             </div>

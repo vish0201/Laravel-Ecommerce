@@ -55,8 +55,8 @@
             <div class="user-details">
                 <h5>{{ $user->firstname }} {{ $user->lastname }}</h5>
                 <img src="{{ "/" . env('PROFILE_DIR') . $user->profile_picture }}" alt="Profile Picture">
-                <p class="mt-4" >Email: {{ $user->email }}</p>
-                <p>Username: {{ $user->username }}</p>
+                <p class="mt-4">Username: @ {{ $user->username }}</p>
+                <p class="mt-2" >Email: {{ $user->email }}</p>
             </div>
         </div>
     </div>

@@ -1,65 +1,69 @@
 @foreach ($products as $product)
     <div class="col-md-3 mb-4">
-        <div class="card product-card h-100 position-relative">
-            <div class="image-placeholder" id="placeholder-{{ $product->id }}"></div>
-            <img src="{{ '/' . env('PRODUCT_DIR') . '/' . $product->images[0] }}" class="card-img-top d-none  object-fit-contain"
-                alt="{{ $product->name }}" id="product-image-{{ $product->id }}" onload="showImage({{ $product->id }})">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <h5 class="card-title text-capitalize">{{ $product->name }}</h5>
-                    <p class="card-text price">${{ $product->price }}</p>
+        <a class="text-decoration-none " href="{{ route('product.view', ['product_id' => $product->id]) }}">
+            <div class="card product-card h-100 position-relative">
+                <div class="image-placeholder" id="placeholder-{{ $product->id }}"></div>
+                <img src="{{ '/' . env('PRODUCT_DIR') . '/' . $product->images[0] }}"
+                    class="card-img-top d-none  object-fit-contain" alt="{{ $product->name }}"
+                    id="product-image-{{ $product->id }}" onload="showImage({{ $product->id }})">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title text-capitalize">{{ $product->name }}</h5>
+                        <p class="card-text price">₹ {{ $product->price }}</p>
+                    </div>
+                    <p class="card-text text-truncate ">{{ $product->description }}</p>
+                    <td>{{ $product->category->name }}</td>
+
                 </div>
-                <p class="card-text">{{ $product->description }}</p>
-                <td>{{ $product->category->name }}</td>
-                @if ($product->featured)
-                    <p class="card-text featured">Featured Product</p>
-                @endif
+
+                @php
+                    $userId = auth()->id();
+                    $productId = $product->id;
+                    $isProductInCart = \App\Models\Cart::where('user_id', $userId)
+                        ->where('product_id', $productId)
+                        ->exists();
+
+                    $isProductBookmarked = \App\Models\Bookmark::where('user_id', $userId)
+                        ->where('product_id', $productId)
+                        ->exists();
+                @endphp
+
+                <form action="{{ $isProductInCart ? route('cart.remove') : route('cart.add') }}" method="POST">
+                    @csrf
+                    @if ($isProductInCart)
+                        @method('DELETE')
+                    @endif
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="number" name="quantity" class="d-none" value="1" min="1">
+                    <button type="submit" class="btn border-0 position-absolute top-0 start-0">
+                        <i class="bi {{ $isProductInCart ? 'bi-cart-check-fill' : 'bi-cart' }} fs-5"></i>
+                    </button>
+                </form>
+
+                <form action="{{ $isProductBookmarked ? route('bookmark.remove') : route('bookmark.add') }}"
+                    method="POST">
+                    @csrf
+                    @if ($isProductBookmarked)
+                        @method('DELETE')
+                    @endif
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <button type="submit" class="btn border-0 position-absolute top-0 end-0">
+                        <i class="bi {{ $isProductBookmarked ? 'bi-bookmark-check-fill' : 'bi-bookmark' }} fs-5"></i>
+                    </button>
+                </form>
             </div>
 
-            @php
-                $userId = auth()->id();
-                $productId = $product->id;
-                $isProductInCart = \App\Models\Cart::where('user_id', $userId)
-                    ->where('product_id', $productId)
-                    ->exists();
-
-                $isProductBookmarked = \App\Models\Bookmark::where('user_id', $userId)
-                    ->where('product_id', $productId)
-                    ->exists();
-            @endphp
-
-            <form action="{{ $isProductInCart ? route('cart.remove') : route('cart.add') }}" method="POST">
-                @csrf
-                @if ($isProductInCart)
-                    @method('DELETE')
-                @endif
-                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <input type="number" name="quantity" class="d-none" value="1" min="1">
-                <button type="submit" class="btn border-0 position-absolute top-0 start-0">
-                    <i class="bi {{ $isProductInCart ? 'bi-cart-check-fill' : 'bi-cart' }} fs-5"></i>
-                </button>
-            </form>
-
-            <form action="{{ $isProductBookmarked ? route('bookmark.remove') : route('bookmark.add') }}" method="POST">
-                @csrf
-                @if ($isProductBookmarked)
-                    @method('DELETE')
-                @endif
-                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <button type="submit" class="btn border-0 position-absolute top-0 end-0">
-                    <i class="bi {{ $isProductBookmarked ? 'bi-bookmark-check-fill' : 'bi-bookmark' }} fs-5"></i>
-                </button>
-            </form>
-        </div>
+        </a>
     </div>
 @endforeach
 
 <style>
     .image-placeholder {
         width: 100%;
-        padding-top: 75%; /* Aspect ratio 4:3 */
+        padding-top: 75%;
+        /* Aspect ratio 4:3 */
         background-color: #f0f0f0;
         position: relative;
     }
@@ -75,8 +79,6 @@
         background: linear-gradient(45deg, #ddd, #eee);
         transform: translate(-50%, -50%);
     }
-
-
 </style>
 
 <script>

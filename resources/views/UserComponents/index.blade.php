@@ -7,7 +7,7 @@
             width: 80%;
             margin: auto;
             overflow: hidden;
-            /* border-radius: 30px; */
+            border-radius: 10px;
             margin-top: 12px;
         }
 
@@ -69,15 +69,37 @@
         <div class="row">
             @foreach ($category as $categories)
                 <div class="col-md-3 d-flex justify-content-center mb-4">
-                    <a href="{{ route('category.products', ['id' => $categories->id]) }}" class="text-decoration-none w-100 h-100 d-flex flex-column align-items-center position-relative">
-                        <img src="{{ env('CATEGORY_DIR') . $categories->image }}" class="img-fluid rounded-5 shadow mb-3" style="object-fit: cover; height: 200px; width: 100%;" alt="{{ $categories->name }}">
+                    <a href="{{ route('category.products', ['id' => $categories->id]) }}"
+                        class="text-decoration-none w-100 h-100 d-flex flex-column align-items-center position-relative">
+                        <img src="{{ env('CATEGORY_DIR') . $categories->image }}" class="img-fluid rounded-5 shadow mb-3"
+                            style="object-fit: cover; height: 200px; width: 100%;" alt="{{ $categories->name }}">
                         <h3 class="text-center text-capitalize text-dark">{{ $categories->name }}</h3>
                     </a>
                 </div>
             @endforeach
         </div>
     </div>
-    
+
+
+
+
+    <h2 class="text-center p-3 mt-4"> - Featured Products - </h2>
+    <div class="container p-3">
+        <div class="row">
+            @foreach ($products as $product)
+                <div class="col-md-3 d-flex justify-content-center mb-4">
+                    <a href="{{ route('product.view', ['product_id' => $product->id]) }}"
+                        class="text-decoration-none w-100 h-100 d-flex flex-column align-items-center position-relative">
+                        <img src="{{ env('PRODUCT_DIR') . '/' . $product->images[0] }}" class=" rounded-5 shadow mb-3"
+                            style="object-fit: contain; height: 200px; width: 100%;" alt="{{ $product->name }}">
+                        <h3 class="text-center text-capitalize text-dark">{{ $product->name }}</h3>
+
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
 
 
 

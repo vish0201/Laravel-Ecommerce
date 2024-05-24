@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('price');
-            $table->json('images');
+            $table->json('images')->default('Placeholder-image.webp');
             $table->timestamps();
         });
     }

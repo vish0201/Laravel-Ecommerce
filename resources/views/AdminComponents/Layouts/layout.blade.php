@@ -11,18 +11,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+    integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
 
-
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     <style>
-        ::-webkit-scrollbar {
+
+         ::-webkit-scrollbar {
             width: 5px;
             /* Set width of the scrollbar */
         }
-
         ::-webkit-scrollbar-thumb {
             background-color: #4D869C;
         }
@@ -39,7 +39,6 @@
         html {
             scroll-behavior: smooth;
         }
-
         .w-5 {
             display: none;
         }
@@ -121,7 +120,7 @@
             <h4 style="font-family: cursive" class="text-white text-center text-decoration-underline">E-COMMERCE</h4>
             <hr>
 
-            <a href="{{ route('index') }}" class="text-decoration-none " id="dashboard">Dashboard</a>
+            <a href="{{ route('index') }}" class="text-decoration-none "  id="dashboard">Dashboard</a>
             <a href="{{ route('category.category') }}" class="text-decoration-none " id="categories">Categories</a>
             <a href="{{ route('product.product') }}" class="text-decoration-none " id="products">Products</a>
             <a href="{{ route('users') }}" class="text-decoration-none " id="products">Users</a>
@@ -129,14 +128,17 @@
 
 
 
-            <a class="position-absolute  bottom-0 mb-4 w-100     " href="{{ route('logout') }}" id="logout">Logout
-            </a>
+            <a  class="position-absolute  bottom-0 mb-4 w-100     "   href="{{ route('logout') }}" id="logout">Logout    </a>
 
             <!-- Add more sidebar links as needed -->
         </div>
 
         <div class="content p-4">
             @yield('content')
+
+            @stack('scripts')
+
+
         </div>
     @else
         @include('AdminComponents.login')
@@ -158,6 +160,11 @@
             }
         });
     });
+
+
+
+    
+
 </script>
 
 </html>

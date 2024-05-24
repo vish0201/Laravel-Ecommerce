@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',   function () {
 
     $category  =  ProductCategory::where('featured', true)->get();
-    $product = Product::all();
+    $products = Product::where('featured', true)->get();
     $user = User::all();
     $banners = Banner::where('featured', true)->get();
 
 
-    return view('UserComponents.index', compact('category', 'product', 'user', 'banners'));
+    return view('UserComponents.index', compact('category', 'products', 'user', 'banners'));
 })->name('user.index');
 
 
@@ -41,3 +41,6 @@ require __DIR__ . '/AdminRoutes/banners.php';
 require __DIR__ . '/UserRoutes/common/loginSignup.php';
 require __DIR__ . '/UserRoutes/cart.php';
 require __DIR__ . '/UserRoutes/bookmark.php';
+require __DIR__ . '/UserRoutes/common/about.php';
+
+

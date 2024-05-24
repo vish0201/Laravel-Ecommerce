@@ -44,7 +44,7 @@ class CartController extends Controller
         // Check if user is logged in
         if (!Auth::check()) {
             // Redirect to login/signup page
-            return redirect()->route('user-login-signup')->with('error', 'Please login or sign up to continue.');
+            return redirect()->route('user.login')->with('error', 'Please login or sign up to continue.');
         }
 
         $request->validate([
@@ -72,7 +72,7 @@ class CartController extends Controller
     public function getCart()
     {
         if (!Auth::check()) {
-            return redirect()->route('user-login-signup')->with('error', 'Please login or sign up to continue.');
+            return redirect()->route('user.login')->with('error', 'Please login or sign up to continue.');
         }
 
         $user_id = Auth::id();
@@ -87,7 +87,7 @@ class CartController extends Controller
         // Check if user is logged in
         if (!Auth::check()) {
             // Redirect to login/signup page
-            return redirect()->route('user-login-signup')->with('error', 'Please login or sign up to continue.');
+            return redirect()->route('user.login')->with('error', 'Please login or sign up to continue.');
         }
 
         $userId = Auth::id();

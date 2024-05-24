@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     public function getallproducts()
     {
-        $products = Product::all();
+        $products = Product::paginate(7);
 
         return view('AdminComponents.Products.product', compact('products'));
     }
@@ -25,7 +25,6 @@ class ProductController extends Controller
 
     public function create()
     {
-
         $categories = ProductCategory::all();
 
         return view("AdminComponents.Products.create", compact('categories'));
@@ -44,6 +43,16 @@ class ProductController extends Controller
         $product->save();
         
         return back()->with('success', 'Category featured status toggled successfully.');
+    }
+
+
+    public function showProduct($id)
+    {
+        // Fetch the product by ID
+        $product = Product::findOrFail($id);
+
+        // Return the view with the product
+        return view('UserComponents.pages.product-detail', ['product' => $product]);
     }
 
 
