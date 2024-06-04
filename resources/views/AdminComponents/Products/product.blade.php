@@ -59,7 +59,7 @@
                                         <div class="image-overlay  ">
                                             @foreach ($product->images as $image)
                                                 <img src="{{ '/' . env('PRODUCT_DIR') . '/' . $image }}"
-                                                    class="overlay-image" alt="Product Image">
+                                                    class="overlay-image border-start   border-black  " alt="Product Image">
                                             @endforeach
                                         </div>
                                     </div>

@@ -128,7 +128,7 @@
 
 
 
-            <a  class="position-absolute  bottom-0 mb-4 w-100     "   href="{{ route('logout') }}" id="logout">Logout    </a>
+            <a  class="position-absolute  bottom-0 mb-4 w-100  "   href="{{ route('logout') }}" id="logout">Logout    </a>
 
             <!-- Add more sidebar links as needed -->
         </div>
