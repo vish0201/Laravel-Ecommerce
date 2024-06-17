@@ -35,13 +35,13 @@ class ProductController extends Controller
     {
         // Retrieve the category by its ID
         $product = Product::findOrFail($productId);
-        
+
         // Toggle the featured status
         $product->featured = !$product->featured;
-    
+
         // Save the changes
         $product->save();
-        
+
         return back()->with('success', 'Category featured status toggled successfully.');
     }
 
@@ -57,7 +57,8 @@ class ProductController extends Controller
 
 
 
-    public function store(Request $request)    {
+    public function store(Request $request)
+    {
         // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -66,7 +67,7 @@ class ProductController extends Controller
             'category' => 'required|exists:product_categories,id', // Assuming 'categories' is your categories table
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Assuming maximum file size is 2MB
         ]);
-    
+
         // Create a new product instance
         $product = new Product([
             'name' => $validatedData['name'],
@@ -74,7 +75,7 @@ class ProductController extends Controller
             'price' => $validatedData['price'],
             'cat_id' => $validatedData['category'],
         ]);
-    
+
 
         // Handle image upload
         if ($request->hasFile('images')) {
@@ -92,23 +93,19 @@ class ProductController extends Controller
                 // Store each image
                 $filename = $image->getClientOriginalName();
                 $image->move($directory, $filename); // You might want to customize the storage path
-    
+
                 // Add image filename to the array
                 $imagePaths[] = $filename;
             }
-    
+
             // Save image filenames in the product model
             $product->images = $imagePaths;
             $product->save();
         }
-    
+
         // Redirect back with a success message
         return redirect()->route('product.product')->with('success', 'Product created successfully!');
     }
-    
-
-
-
 
 
 

@@ -98,6 +98,9 @@
     <script>
 
 
+
+
+
 function previewImage(event) {
     const fileInput = event.target;
     const files = fileInput.files;
